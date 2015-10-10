@@ -21,9 +21,12 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/The-NERD-tree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-scripts/AuthorInfo'
+"Plugin 'vim-scripts/AuthorInfo'
+"Plugin 'hhktony/vim-authorinfo'
 Plugin 'mbbill/fencview'
 Plugin 'jelera/vim-javascript-syntax'
+Plugin 'majutsushi/tagbar'
+Plugin 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -119,7 +122,7 @@ let Tlist_Ctags_Cmd='ctags'
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Use_Right_Window=1
-let g:Tlist_javascript_settings = 'javascript;s:string;a:array;o:object;f:function;m:member'
+let g:Tlist_javascript_settings='javascript;s:string;a:array;o:object;f:function;m:member'
 map <silent> <F4> :TlistToggle<cr>
 
 
