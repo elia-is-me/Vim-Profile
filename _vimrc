@@ -1,7 +1,5 @@
 " update: 2015-10-12
 
-
-
 " always set to no compatible to vi
 set nocompatible 
 
@@ -42,6 +40,8 @@ map <silent> <leader>ss :source $MYVIMRC<cr>
 map <silent> <leader>ee :e $MYVIMRC<cr>
 autocmd! bufwritepost vimrc source $MYVIMRC 
 
+set nowrap
+set whichwrap+=<,>,h,l
 map <silent><leader>tt :set invwrap<cr>
 
 " Wildmenu
@@ -55,7 +55,6 @@ set sw=4
 set ts=4
 
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
 set noswapfile
 
 " Ingore case when search
@@ -67,7 +66,6 @@ set lazyredraw
 set magic
 set showmatch
 set mat=2
-set nowrap
 
 set laststatus=2
 set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
