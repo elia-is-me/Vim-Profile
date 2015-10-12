@@ -1,4 +1,4 @@
-" update: 2015/10/08
+" update: 2015-10-12
 
 
 
@@ -25,7 +25,7 @@ Plugin 'scrooloose/nerdcommenter'
 "Plugin 'hhktony/vim-authorinfo'
 Plugin 'mbbill/fencview'
 Plugin 'jelera/vim-javascript-syntax'
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
@@ -42,6 +42,8 @@ map <silent> <leader>ss :source $MYVIMRC<cr>
 map <silent> <leader>ee :e $MYVIMRC<cr>
 autocmd! bufwritepost vimrc source $MYVIMRC 
 
+map <silent><leader>tt :set invwrap<cr>
+
 " Wildmenu
 set wildmenu
 set wildignore=*.o,*~,*.pyc,*.jpg,*.png,*.ico,*.exe
@@ -54,7 +56,6 @@ set ts=4
 
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
-
 set noswapfile
 
 " Ingore case when search
@@ -110,7 +111,6 @@ map k gk
 nmap <C-a> ggvG$
 imap <C-s> <Esc>:wa<cr>i<Right>
 nmap <C-s> :wa<cr>
-map <C-w> :set wrap<cr>
 
 " --------------------
 " Tagbar
@@ -133,20 +133,14 @@ map <silent> <F3> :NERDTreeToggle<cr>
 
 " -------------------
 " => abbreviation
-iab imail <c-r>elia.of.war@gmail.com<cr>
-iab idate  <c-r>=strftime("%Y/%m/%d")<cr>
+iab imail <c-r>jeannela@foxmail.com<cr>
+iab idate  <c-r>=strftime("%Y-%m-%d")<cr>
 iab itime <c-r>=strftime("%H:%M")<cr>
 
 " -------------------------------------
-" => open _vimrc file in a split window
+" => 
 
 nnoremap <leader>1 :set filetype=javascript<cr>
 nnoremap <leader>2 :set filetype=css<cr>
 nnoremap <leader>w :w<cr>
 
-" ------------------------------------
-" => Auto update author's info
-let g:vimrc_author='J'
-let g:vimrc_email='jeannela@foxmail.com'
-let g:vimrc_homepage='http://elia-is-me.github.io'
-nmap <F5> :AuthorInfoDetect <cr>
