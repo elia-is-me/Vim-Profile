@@ -11,5 +11,5 @@
 
 #### 参考
 
-* [http://amix.dk/vim/vimrc.html]
-* [http://wyw.dcweb.cn/vim/\_vimrc.html]
+* http://amix.dk/vim/vimrc.html
+* http://wyw.dcweb.cn/vim/\_vimrc.html
