@@ -1,21 +1,22 @@
-" ==================== "
-"  update: 2015-10-28
-" ==================== "
+"""""""""""""""""""""""""""""""""
+" update: 2015-11-02 19:19
+"""""""""""""""""""""""""""""""""
 
-" ================================================================================"
-" always set to no compatible to vi
+"""""""""""""""""""""""""""""""""""""""""""""""
+" * Vundle: Use vundle as plugin manager tool
+" * install git and vundle first. 
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+" Required by vundle
 set nocompatible 
+filetype off 
 
-"{{{ use vundle to manager my plugins
-
-filetype off
-
-" set the runtime path to include Vundle and initialize
+" Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Let vundle manager vundle, required.
+Plugin 'VundleVim/Vundle.vim' 
 
 Plugin 'tomasr/molokai'
 Plugin 'gorodinskiy/vim-coloresque'
@@ -26,20 +27,18 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'mbbill/fencview'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'mhinz/vim-startify'
-"Plugin 'dyng/ctrlsf.vim'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-"}}}
+" Vundle settings ended here
+call vundle#end()
 
-" ============================================================================== "
-"
 
+""""""""""""""""""""""
+" * Encoding settings
+""""""""""""""""""""""
 if has('multi_byte')
 	" Legacy encoding is the system default encoding
-	"let legacy_encoding=&encoding
+	let legacy_encoding=&encoding
 endif
-
 
 if has('gui_running') && has('multi_byte')
 	" Set encoding (and possibly fileencodings)
@@ -52,125 +51,240 @@ if has('gui_running') && has('multi_byte')
 	endif
 
 	language messages zh_CN.UTF-8
-
 endif
 
+
+
+
+"""""""""""""""""""""""""""""""""""""
+" * Use directx (disabled by default)
+"""""""""""""""""""""""""""""""""""""
 if has('directx') && $VIM_USE_DIRECTX != '0'
+	" renmode:5 >> best
 	"set renderoptions=type:directx,renmode:5
-	let s:use_directx=1
-endif
-
-if has('syntax')
-	set spelllang=en_gb
+	"let s:use_directx=1
 endif
 
 
-filetype plugin indent on    " required
+"""""""""""""""""""""""
+" * General
+"""""""""""""""""""""""
 
-" Set Leader
-let mapleader=","
-map <silent> <leader>ss :source $MYVIMRC<cr>
-map <silent> <leader>ee :e $MYVIMRC<cr>
-autocmd! bufwritepost vimrc source $MYVIMRC 
-map <silent> <leader>xx :close<cr>
+" Enable filetype plugins
+filetype plugin indent on
 
-set nowrap
-set whichwrap+=<,>,h,l
-map <silent><leader>tt :set invwrap<cr>
-set linebreak
-set showbreak=>_
-set breakat-=-
+" Set auto read when a file is changed from the outside
+set autoread
 
-set textwidth=80
-set formatoptions+=mM
+" Set a mapleader key instead of '\'
+let mapleader = ","
+let g:mapleader = ","
 
+" Set 5 lines to the cursor
+set so=5
 
-" Wildmenu
-set wildmenu
-set wildignore=*.o,*~,*.pyc,*.jpg,*.png,*.ico,*.exe
+" Use Unix as a standard file type
+set ffs=unix,dos,mac
 
+"""""""""""""""""""""""""""""""
+" * User interface
+"""""""""""""""""""""""""""""""
+
+" Show line number
 set number
 set numberwidth=6
+
+" Always show current postion(at status bar)
 set ruler
+
+" A buffer becomes hidden when it is abandoned
 set hid
-set sw=4
-set ts=4
 
+" Configure backspace
 set backspace=eol,start,indent
-set noswapfile
 
-" Ingore case when search
+" No error bells
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Search settings
+" Ignore case when searching
 set ignorecase
+
+" Try to be smart about cases
 set smartcase
+
+" Highlight search results
 set hlsearch
+
+" Makes search act like search in morden brwsers
 set incsearch
-set lazyredraw
+
+
+" For regular expressions turn magic on
 set magic
+
+" Don't redraw while executing macros (good performance)
+set lazyredraw
+
+" Show matching brackets when text indicator is over them
 set showmatch
+
+" How many tenths of a second to blink when matching brackets
 set mat=2
 
+" Turn on the Wild menu
+set wildmenu
+set wildignore=*.o,*~,*.pyc
+
+" Set status line
 set laststatus=2
 set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 
-" No sound on errors
-if has("gui_running")
-	autocmd GUIEnter * set vb t_vb=
-endif
-
-set noerrorbells
-set novisualbell
-
-" Color and Fonts
-syntax enable
-let g:molokai_original=0
-colorscheme mermaid
-
-if has("gui_running")
-	" t: tearoff menu items
-	" T: Toolbar
-	set guioptions-=T
-	set guioptions-=t
-	"map <f11> :call libcallnr('gvimfullscreen.dll', 'ToggleFullScreen', 0)<cr>
-endif
-
+" No new commented lines if...
 set fo-=cro
 
-set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,gb2312,big5,latin1
-set ffs=unix,dos,mac
-map <silent> <F2> :FencView <cr>
 
-set guifont=Monaco:h8
-"set guifont=menlo:h9
-"set gfw=NSimSun:h9
-set gfw=Mingliu:h9
-set linespace=-1
+""""""""""""""""""""""""""
+" * Window 
+""""""""""""""""""""""""""
 
+if has("gui_running")
+	" Hide toolbar
+	set guioptions-=T
 
-set lines=40
-set columns=120
+	" Tearoff menu items
+	set guioptions-=t
+
+	" Default window size
+	set lines=40
+	set columns=120
+endif
+
+" Color column position
 set colorcolumn=90
 
-" => Moving around
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" * Text, tab, indent and wrap related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Wrap settings
+set nowrap
+set whichwrap+=<,>,h,l
+set linebreak
+"set breakat
+
+" Set wrap if FileType == markdown
+autocmd FileType markdown set wrap
+
+" Text breakline
+set textwidth=80
+set formatoptions+=mM
+autocmd FileType markdown set tw=0
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" * Backup and undo 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Turn backup and swapfile off
+set nobackup
+set nowb
+set noswapfile
+
+
+""""""""""""""""""""""""""""""""""""""""
+" * Colors and fonts
+""""""""""""""""""""""""""""""""""""""""
+
+" Enable syntax
+syntax on
+
+" Set colorscheme
+if has("gui_running")
+	set background=dark
+	colorscheme mermaid
+endif
+
+" Set fonts(require a non-offical version of gvim.exe)
+if has("gui_running")
+	set guifont=Monaco:h8:cANSI
+	set gfw=Mingliu:h9
+
+	" Reduce linespace
+	set linespace=-1
+endif
+
+""""""""""""""""""""""""""""""""""""""""""
+" * Moving around
+""""""""""""""""""""""""""""""""""""""""""
+
+" Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
-map <A-h> <C-o>h
-map <A-j> <C-o>j
-map <A-k> <C-o>k
-map <A-l> <C-o>l
+
+" Move between splitted windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 
-" mswin style keymaps
+"""""""""""""""""""""""""""""
+" * Mswin style keymaps
+""""""""""""""""""""""""""""
+
+" C-a to select all and C-s to save
 nmap <C-a> ggvG$
 imap <C-s> <Esc>:wa<cr>i<Right>
 nmap <C-s> :wa<cr>
 
-" --------------------
-" Tagbar
-"let g:tagbar_left = 0
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" * Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" --------------------
-" => taglist(ctags)
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Abbreviation
+iab idate  <c-r>=strftime("%Y-%m-%d")<cr>
+iab itime <c-r>=strftime("%H:%M")<cr>
+
+" Quick set filetype
+nnoremap <leader>1 :set filetype=javascript<cr>
+nnoremap <leader>2 :set filetype=css<cr>
+
+" Quick save
+nnoremap <leader>w :w<cr>
+
+" Quick load vimrc
+map <silent> <leader>ss :source $MYVIMRC<cr>
+
+" Open vimrc
+map <silent> <leader>ee :e $MYVIMRC<cr>
+autocmd! bufwritepost vimrc source $MYVIMRC 
+
+
+
+
+"""""""""""""""""""""""""
+" * Taglist settings
+"""""""""""""""""""""""""
 let Tlist_Ctags_Cmd='ctags'
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
@@ -179,27 +293,22 @@ let g:Tlist_javascript_settings='javascript;s:string;a:array;o:object;f:function
 map <silent> <F4> :TlistToggle<cr>
 
 
-" --------------------
-" => nerd tree
+""""""""""""""""""""""""""""""""
+" * NERD_tree
+""""""""""""""""""""""""""""""""
 let g:NERDChristmasTree=1
 map <silent> <F3> :NERDTreeToggle<cr>
 
-" -------------------
-" => abbreviation
-iab iname <c-r>elia<cr>
-iab imail <c-r>jeannela@foxmail.com<cr>
-iab idate  <c-r>=strftime("%Y-%m-%d")<cr>
-iab itime <c-r>=strftime("%H:%M")<cr>
 
-" -------------------------------------
-" => 
+"""""""""""""""""""""""""""
+" * FencView
+"""""""""""""""""""""""""""
+map <silent> <F2> :FencView <cr>
 
-nnoremap <leader>1 :set filetype=javascript<cr>
-nnoremap <leader>2 :set filetype=css<cr>
-nnoremap <leader>w :w<cr>
 
-"----------------------------------------------------------------------------------------
-" startify settings
+""""""""""""""""""""""""""""
+" * Startify
+""""""""""""""""""""""""""""
 let g:startify_bookmarks = [
 			\ 'E:\GitHub\Foobar2000-UI-Scripts\scripts\Playlist.js',
 			\ 'E:\GitHub\Foobar2000-UI-Scripts\scripts\Cover+PlaylistManager.js',
