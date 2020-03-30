@@ -1,35 +1,33 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" update: 2015-11-02 19:19
+" update: 2020-03-09 15:37
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" * Vundle: Use vundle as plugin manager tool
-" * install git and vundle first. 
+" Use Vim-Plug as plugin manager;
+" Install Vim-Plug:
+" * create folder "~/vimfiles/autoload"
+" * download plug.vim file
+" (https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim) and put
+" it in the folder created before;
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Required by vundle
-set nocompatible 
-filetype off 
+"set nocompatible 
+"filetype off 
 
-" Set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/vimfiles/plugged')
 
-" Let vundle manager vundle, required.
-Plugin 'VundleVim/Vundle.vim' 
-
-Plugin 'tomasr/molokai'
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/The-NERD-tree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mbbill/fencview'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'mhinz/vim-startify'
+Plug 'vim-scripts/taglist.vim'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/The-NERD-tree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mbbill/fencview'
+" Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+" Plug 'mhinz/vim-startify'
+Plug 'leafgarland/typescript-vim'
 
 " Vundle settings ended here
-call vundle#end()
+call plug#end()
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -41,7 +39,7 @@ if has('multi_byte')
 endif
 
 if has('gui_running') && has('multi_byte')
-	" Set encoding (and possibly fileencodings)
+	"Set encoding (and possibly fileencodings)
 	if $LANG !~ '\.' || $LANG =~? '\.UTF-8$'
 		set encoding=utf-8
 	else 
@@ -51,6 +49,8 @@ if has('gui_running') && has('multi_byte')
 	endif
 
 	language messages zh_CN.UTF-8
+	source $VIMRUNTIME/delmenu.vim
+	source $VIMRUNTIME/menu.vim
 endif
 
 
@@ -208,15 +208,22 @@ syntax on
 
 " Set colorscheme
 if has("gui_running")
-	set background=dark
-	colorscheme mermaid
+	try
+		colorscheme mermaid
+	catch /^Vim\%((\a\+)\)\=:E185/
+		colorscheme desert
+	endtry
 endif
 
 " Set fonts(require a non-offical version of gvim.exe)
 if has("gui_running")
 	"set guifont=Monaco:h8:cANSI
-	set guifont=Source\ Code\ Pro:h9:cANSI
-	"set gfw=Mingliu:h9
+	try
+		set guifont=IBM\ Plex\ Mono:h10:cANSI
+	catch
+		set guifont=
+	endtry
+	"set gfw=ºÚÌå:h9
 
 	" Reduce linespace
 	"set linespace=-1
