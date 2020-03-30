@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" update: 2020-03-09 15:37
+" Update: 2020-03-30 12:57 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -215,16 +215,13 @@ if has("gui_running")
 	endtry
 endif
 
-" Set fonts(require a non-offical version of gvim.exe)
 if has("gui_running")
-	"set guifont=Monaco:h8:cANSI
 	try
 		set guifont=IBM\ Plex\ Mono:h10:cANSI
 	catch
 		set guifont=
 	endtry
 	"set gfw=ºÚÌå:h9
-
 	" Reduce linespace
 	"set linespace=-1
 endif
@@ -275,7 +272,6 @@ iab itime <c-r>=strftime("%H:%M")<cr>
 
 " Quick set filetype
 nnoremap <leader>1 :set filetype=javascript<cr>
-nnoremap <leader>2 :set filetype=css<cr>
 
 " Quick save
 nnoremap <leader>w :w<cr>
@@ -290,12 +286,12 @@ autocmd! bufwritepost vimrc source $MYVIMRC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " * Taglist settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Ctags_Cmd='ctags'
-let Tlist_Show_One_File=1
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Right_Window=1
-let g:Tlist_javascript_settings='javascript;s:string;a:array;o:object;f:function;m:member'
-map <silent> <F4> :TlistToggle<cr>
+" let Tlist_Ctags_Cmd='ctags'
+" let Tlist_Show_One_File=1
+" let Tlist_Exit_OnlyWindow=1
+" let Tlist_Use_Right_Window=1
+" let g:Tlist_javascript_settings='javascript;s:string;a:array;o:object;f:function;m:member'
+" map <silent> <F4> :TlistToggle<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -309,29 +305,4 @@ map <silent> <F3> :NERDTreeToggle<cr>
 " * FencView
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <F2> :FencView <cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" * Startify
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:startify_bookmarks = [
-			\ 'E:\GitHub\Foobar2000-UI-Scripts\scripts\Playlist.js',
-			\ 'E:\GitHub\Foobar2000-UI-Scripts\scripts\Cover+PlaylistManager.js',
-			\ 'E:\GitHub\Foobar2000-UI-Scripts\scripts\Xiami.js',
-			\ 'E:\GitHub\WSH-Playlist\Scripts\pl.js'
-			\ ]
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! Cmt()
-	let end=80
-	let num=col("$")-1
-	let chr=getline(".")[col("$")-1]
-	while num<=end
-		let line=getline(".")
-		let repl=substitute(line,'<End>',chr,'g')
-		call setline(".",repl)
-		let num=num+1
-	endwhile
-endfunction
 
