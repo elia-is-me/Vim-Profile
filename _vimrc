@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Update: 2020-03-30 12:57 
+" Update: 2021-02-07 15:14 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -16,17 +16,21 @@
 
 call plug#begin('~/vimfiles/plugged')
 
-Plug 'vim-scripts/taglist.vim'
+"Plug 'vim-scripts/taglist.vim'
 Plug 'ervandew/supertab'
 Plug 'vim-scripts/The-NERD-tree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mbbill/fencview'
+Plug 'cormacrelf/vim-colors-github'
 " Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 " Plug 'mhinz/vim-startify'
 Plug 'leafgarland/typescript-vim'
+Plug 'elia-is-me/vim-color-mermaid'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript'] }
 
-" Vundle settings ended here
 call plug#end()
 
 
@@ -61,8 +65,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('directx') && $VIM_USE_DIRECTX != '0'
 	" renmode:5 >> best
-	"set renderoptions=type:directx,renmode:5
-	"let s:use_directx=1
+	set renderoptions=type:directx,renmode:5
+	let s:use_directx=1
 endif
 
 
@@ -122,7 +126,6 @@ set hlsearch
 " Makes search act like search in morden brwsers
 set incsearch
 
-
 " For regular expressions turn magic on
 set magic
 
@@ -160,11 +163,11 @@ if has("gui_running")
 
 	" Default window size
 	set lines=40
-	set columns=120
+	set columns=84
 endif
 
 " Color column position
-set colorcolumn=90
+set colorcolumn=78
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " * Text, tab, indent and wrap related
@@ -184,7 +187,7 @@ set linebreak
 autocmd FileType markdown set wrap
 
 " Text breakline
-set textwidth=80
+set textwidth=78
 set formatoptions+=mM
 autocmd FileType markdown set tw=0
 
@@ -209,7 +212,7 @@ syntax on
 " Set colorscheme
 if has("gui_running")
 	try
-		colorscheme mermaid
+		colorscheme github
 	catch /^Vim\%((\a\+)\)\=:E185/
 		colorscheme desert
 	endtry
@@ -217,11 +220,10 @@ endif
 
 if has("gui_running")
 	try
-		set guifont=IBM\ Plex\ Mono:h10:cANSI
+		set guifont=Fira_Code:h10:cANSI
 	catch
 		set guifont=
 	endtry
-	"set gfw=ºÚÌå:h9
 	" Reduce linespace
 	"set linespace=-1
 endif
@@ -305,4 +307,3 @@ map <silent> <F3> :NERDTreeToggle<cr>
 " * FencView
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <F2> :FencView <cr>
-
